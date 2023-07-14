@@ -7,6 +7,7 @@ import { MyPlugin } from 'main'
 export interface Settings {
 	confluence: {
 		domain: string
+		username: string
 		token: string
 	}
 	obsidian: {
@@ -17,6 +18,7 @@ export interface Settings {
 export const DEFAULT_SETTINGS: Settings = {
 	confluence: {
 		domain: '',
+		username: '',
 		token: ''
 	},
 	obsidian: {
@@ -49,7 +51,18 @@ export class SampleSettingTab extends PluginSettingTab {
 					this.plugin.settings.confluence.domain = value;
 					await this.plugin.saveSettings();
 				}));
-		
+
+		new Setting(containerEl)
+			.setName('Atlassian username')
+			.setDesc('username@domain.com')
+			.addText(text => text
+				.setPlaceholder('Enter your secret Token')
+				.setValue(this.plugin.settings.confluence.username)
+				.onChange(async (value) => {
+					this.plugin.settings.confluence.username = value;
+					await this.plugin.saveSettings();
+				}));
+
 		new Setting(containerEl)
 			.setName('Confluence Token')
 			.setDesc('The confluence token link to your account')

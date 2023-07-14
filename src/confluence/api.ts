@@ -5,3 +5,7 @@ export function createNotice(str: string) {
     new Notice(str);
 }
 
+export function testAPI() {
+    
+}
+
