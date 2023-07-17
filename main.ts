@@ -1,6 +1,6 @@
 import { App, Editor, MarkdownView, Modal, Plugin } from 'obsidian';
-import { createNotice } from 'src/confluence/api'
-import { Settings, SampleSettingTab, DEFAULT_SETTINGS } from 'src/settings'
+import { testAPI } from 'src/confluence/api'
+import { Settings, SettingTab, DEFAULT_SETTINGS } from 'src/settings'
 
 // Remember to rename these classes and interfaces!
 
@@ -13,7 +13,7 @@ export default class MyPlugin extends Plugin {
 		// This creates an icon in the left ribbon.
 		const ribbonIconEl = this.addRibbonIcon('book-marked', 'Sample Plugin', (evt: MouseEvent) => {
 			// Called when the user clicks the icon.
-			createNotice('This is a notice 2 !');
+			testAPI(`${this.settings.confluence.username}:${this.settings.confluence.token}`, this.settings.confluence.domain);
 		});
 		// Perform additional things with the ribbon
 		ribbonIconEl.addClass('my-plugin-ribbon-class');
@@ -60,7 +60,7 @@ export default class MyPlugin extends Plugin {
 		});
 
 		// This adds a settings tab so the user can configure various aspects of the plugin
-		this.addSettingTab(new SampleSettingTab(this.app, this));
+		this.addSettingTab(new SettingTab(this.app, this));
 
 		// If the plugin hooks up any global DOM events (on parts of the app that doesn't belong to this plugin)
 		// Using this function will automatically remove the event listener when this plugin is disabled.

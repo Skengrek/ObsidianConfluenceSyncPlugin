@@ -26,7 +26,7 @@ export const DEFAULT_SETTINGS: Settings = {
 	}
 }
 
-export class SampleSettingTab extends PluginSettingTab {
+export class SettingTab extends PluginSettingTab {
 	plugin: MyPlugin;
 
 	constructor(app: App, plugin: MyPlugin) {
@@ -45,7 +45,7 @@ export class SampleSettingTab extends PluginSettingTab {
 			.setName('Confluence Domain')
 			.setDesc('The confluence domain you want to upload files to')
 			.addText(text => text
-				.setPlaceholder('Enter your secret')
+				.setPlaceholder('Enter the domain')
 				.setValue(this.plugin.settings.confluence.domain)
 				.onChange(async (value) => {
 					this.plugin.settings.confluence.domain = value;
@@ -56,7 +56,7 @@ export class SampleSettingTab extends PluginSettingTab {
 			.setName('Atlassian username')
 			.setDesc('username@domain.com')
 			.addText(text => text
-				.setPlaceholder('Enter your secret Token')
+				.setPlaceholder('Enter your username')
 				.setValue(this.plugin.settings.confluence.username)
 				.onChange(async (value) => {
 					this.plugin.settings.confluence.username = value;
@@ -80,7 +80,7 @@ export class SampleSettingTab extends PluginSettingTab {
 			.setName('Vault folder')
 			.setDesc('The name of the folder to save the Confluence pages')
 			.addText(text => text
-				.setPlaceholder('Enter your secret')
+				.setPlaceholder('Enter the folder name')
 				.setValue(this.plugin.settings.obsidian.folder)
 				.onChange(async (value) => {
 					this.plugin.settings.obsidian.folder = value;
